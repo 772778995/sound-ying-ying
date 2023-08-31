@@ -4,7 +4,7 @@
     "steoates.autoimport",
     "hearhear.html-comment",
     "esbenp.prettier-vscode",
-    "gruntfuggly.todo-tree",
-    "ashinzekene.nestjs"
+    "ashinzekene.nestjs",
+    "wayou.vscode-todo-highlight"
   ]
 }

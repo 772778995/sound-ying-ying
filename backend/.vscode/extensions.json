@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "steoates.autoimport",
+    "hearhear.html-comment",
+    "esbenp.prettier-vscode",
+    "gruntfuggly.todo-tree",
+    "ashinzekene.nestjs"
+  ]
+}

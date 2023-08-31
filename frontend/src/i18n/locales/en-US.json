@@ -1,0 +1,22 @@
+{
+  "ask-confirm-quit": "Are you sure to exit the program?",
+  "at-least": "at least",
+  "at-most": "at most",
+  "characters": "characters",
+  "hello-quasar": "hello quasra!",
+  "home": "front page",
+  "illegal-URL": "invalid URL",
+  "illegal-date": "illegal date",
+  "illegal-email-format": "invalid email format",
+  "illegal-hex-color": "illegal hex color",
+  "loading": "Loading…",
+  "logout": "sign out",
+  "minimize": "minimize",
+  "must-be": "must be",
+  "please-download-client": "Please download the client",
+  "quit": "quit",
+  "request-error": "Request failed",
+  "requesting": "Requesting...",
+  "this-item-is-required": "This item is required",
+  "web-side-not-supported": "The web side does not support"
+}

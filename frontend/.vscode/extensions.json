@@ -1,0 +1,26 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "wayou.vscode-todo-highlight",
+    "dbaeumer.vscode-eslint",
+    "steoates.autoimport",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag",
+    "hearhear.html-comment",
+    "kisstkondoros.vscode-gutter-preview",
+    "esbenp.prettier-vscode",
+    "abdelaziz18003.quasar-snippets",
+    "lzp.svg-preview-in-code",
+    "vue.volar",
+    "lokalise.i18n-ally",
+    "stylelint.vscode-stylelint",
+    "voorjaar.windicss-intellisense"
+  ],
+  "unwantedRecommendations": [
+    "octref.vetur",
+    "hookyqr.beautify",
+    "dbaeumer.jshint",
+    "ms-vscode.vscode-typescript-tslint-plugin"
+  ]
+}
+

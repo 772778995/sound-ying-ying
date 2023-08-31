@@ -1,0 +1,55 @@
+# compiled output
+/backend/dist
+/backend/node_modules
+
+# Tests
+/coverage
+/.nyc_output
+
+
+# ————————————————————————————————— 👆👆👆👆👆 backend  👆👆👆👆👆 —————————————————————————————————
+# ————————————————————————————————— 👇👇👇👇👇 frontend 👇👇👇👇👇 —————————————————————————————————
+
+.DS_Store
+.thumbs.db
+/frontend/node_modules
+
+# Quasar core related directories
+/frontend/.quasar
+/frontend/dist
+
+# Cordova related directories and files
+/frontend/src-cordova/node_modules
+/frontend/src-cordova/platforms
+/frontend/src-cordova/plugins
+/frontend/src-cordova/www
+
+# Capacitor related directories and files
+/frontend/src-capacitor/www
+/frontend/src-capacitor/node_modules
+
+# BEX related directories and files
+/frontend/src-bex/www
+/frontend/src-bex/js/core
+
+# Log files
+/frontendnpm-debug.log*
+/frontendyarn-debug.log*
+/frontendyarn-error.log*
+
+.eslintrc-auto-import.json
+auto-imports.d.ts
+components.d.ts
+
+# ————————————————————————————————— 👇👇👇👇👇 global 👇👇👇👇👇 —————————————————————————————————
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store

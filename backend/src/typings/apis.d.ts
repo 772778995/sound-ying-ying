@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 export type Urls = {
-  post: "/user/create-user" | "/user/login"
+  post: "/user/register" | "/user/login"
   all: Urls['post']
 }
 
@@ -15,11 +15,11 @@ type ApiDetails = {
   post: {
     
     /**
-     * 创建用户
+     * 注册
      * @status developing
      * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202
      */
-    "/user/create-user": {
+    "/user/register": {
       contentType: "application/json"
       params: never
 
@@ -33,7 +33,7 @@ type ApiDetails = {
        * @description 手机号码
        * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202
        */
-      'phone': number
+      'phone': string
       /**
        * @description 邮箱地址
        * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202

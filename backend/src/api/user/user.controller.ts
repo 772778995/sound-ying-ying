@@ -1,7 +1,8 @@
 import KoaRouter from 'koa-router'
-import { login, createUser } from './user.service'
+import { login, register } from './user.service'
 
 export default new KoaRouter()
+	//
 	.post('/user/login', login)
-  .post('/user/create-user', createUser)
-  .routes()
+	.post('/user/register', register)
+	.routes()

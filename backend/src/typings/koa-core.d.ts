@@ -1,5 +1,4 @@
 import { Context, DefaultContext, ExtendableContext, Next, ParameterizedContext } from 'koa'
-import * as compose from 'koa-compose';
 import { Htt, Object } from 'can-can-word-bug'
 import { HttpCode } from 'can-can-word-bug'
 import { RoutePaths } from './types'
@@ -74,7 +73,3 @@ declare module 'koa' {
 		}
 	}
 }
-
-export type MiddlewareBody<ResponseBodyT = any> = compose.Middleware<
-	ParameterizedContext<DefaultState, DefaultContext, ResponseBodyT>
->;

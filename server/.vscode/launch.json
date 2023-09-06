@@ -5,11 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "server debugger",
-      "cwd": "${workspaceFolder}/server",
+      "name": "backend debugger",
       "request": "launch",
       "runtimeExecutable": "npm",
-      "args": ["run", "dev"],
+      "args": ["run", "start:dev"],
       "skipFiles": ["<node_internals>/**"],
       "type": "node",
       "console": "integratedTerminal"

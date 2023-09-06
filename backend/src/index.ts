@@ -15,7 +15,7 @@ const bootstrap = async () => {
 	await AppDataSource.initialize()
 		.then(() => logger('成功启动数据库'))
 		.catch(err => throwError(`启动数据库失败：${err.message}`))
-		
+
 	const app = new Koa()
 	const staticService = koaStatic(path.join(__dirname, './public'))
 	const router = new KoaRouter()
@@ -31,7 +31,7 @@ const bootstrap = async () => {
 		.use(response)
 		.use(router.routes())
 		.listen(54088, () => logger(`http://127.0.0.1:54088`))
-		.on('error', (err => throwError(`启动服务失败：${err.message}`)))
+		.on('error', err => throwError(`启动服务失败：${err.message}`))
 }
 
 bootstrap()

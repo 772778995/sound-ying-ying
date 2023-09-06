@@ -1,6 +1,6 @@
 # compiled output
-/server/dist
-/server/node_modules
+/backend/dist
+/backend/node_modules
 
 # Tests
 /coverage
@@ -33,9 +33,9 @@
 /frontend/src-bex/js/core
 
 # Log files
-/frontendnpm-debug.log*
-/frontendyarn-debug.log*
-/frontendyarn-error.log*
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
 
 .eslintrc-auto-import.json
 auto-imports.d.ts

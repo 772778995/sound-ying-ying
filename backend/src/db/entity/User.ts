@@ -5,17 +5,17 @@ import { BaseColumn } from './BaseColumn'
 @Entity()
 export class User extends BaseColumn {
 	/** @filter 手机号码 */
-	@PrimaryColumn({ unique: true, length: 11 })
+	@Column({ unique: true, length: 11 })
 	@IsPhoneNumber()
 	phone!: string
 
 	/** @filter 邮箱地址 */
-	@PrimaryColumn({ unique: true })
+	@Column({ unique: true })
 	@IsEmail()
 	email: string
 
 	/** @filter 用户昵称 */
-	@PrimaryColumn({ unique: true, length: 12 })
+	@Column({ unique: true, length: 12 })
 	@Length(6, 12)
 	name!: string
 

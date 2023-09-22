@@ -10,6 +10,7 @@ import path from 'path'
 import response from './middleware/response'
 import { AppDataSource } from './db'
 import throwError from './util/throwError'
+import i18nMiddleware from './middleware/i18n'
 
 const bootstrap = async () => {
 	await AppDataSource.initialize()
@@ -22,6 +23,7 @@ const bootstrap = async () => {
 	router.use('/api', api.routes())
 	app.proxy = true
 	app
+		.use(i18nMiddleware)
 		.use(koaRange)
 		.use(error)
 		.use(accessLogger())

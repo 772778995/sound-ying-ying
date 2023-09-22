@@ -2,9 +2,14 @@ import { Context, DefaultContext, ExtendableContext, Next, ParameterizedContext 
 import { Htt, Object } from 'can-can-word-bug'
 import { HttpCode } from 'can-can-word-bug'
 import { RoutePaths } from './types'
+import locale from '@/middleware/i18n/locales/zh-CN.json'
+
+type Locale = typeof locale
 
 declare module 'koa' {
 	interface ExtendableContext {
+		i18n: <S extends keyof Locale>(str: S) => Locale[S]
+
 		/** @filter 基础响应，无返回提示消息 */
 		return: {
 			(

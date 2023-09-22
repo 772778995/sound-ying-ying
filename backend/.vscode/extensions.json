@@ -5,6 +5,7 @@
 		"hearhear.html-comment",
 		"esbenp.prettier-vscode",
 		"ashinzekene.nestjs",
-		"gruntfuggly.todo-tree"
+		"gruntfuggly.todo-tree",
+		"lokalise.i18n-ally"
 	]
 }

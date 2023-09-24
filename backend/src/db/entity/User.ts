@@ -1,26 +1,21 @@
-import { Length, IsPhoneNumber, IsEmail } from 'class-validator'
-import { Entity, Column, PrimaryColumn } from 'typeorm'
+import { Length, IsEmail, IsMobilePhone } from 'class-validator'
+import { Entity, Column } from 'typeorm'
 import { BaseColumn } from './BaseColumn'
 
 @Entity()
 export class User extends BaseColumn {
 	/** @filter 手机号码 */
 	@Column({ unique: true, length: 11 })
-	@IsPhoneNumber()
-	phone!: string
+	@IsMobilePhone('zh-CN', {}, { message: 'Please enter a valid phone number' })
+	phone: string
 
 	/** @filter 邮箱地址 */
-	@Column({ unique: true })
-	@IsEmail()
+	@Column({ nullable: true })
+	@IsEmail({}, { message: 'Please enter a valid email address' })
 	email: string
 
-	/** @filter 用户昵称 */
-	@Column({ unique: true, length: 12 })
-	@Length(6, 12)
-	name!: string
-
-	/** @filter 密码 */
-	@Column({ length: 12 })
-	@Length(6, 12)
-	psd!: string
+	/** @filter 密码，6-20个字符 */
+	@Column({ length: 20 })
+	@Length(6, 20, { message: 'Please enter a password of 6-20 characters' })
+	psd: string
 }

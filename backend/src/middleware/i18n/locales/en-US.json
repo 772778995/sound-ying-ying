@@ -1,1 +1,10 @@
-{}
+{
+  "ER_DUP_ENTRY: Duplicate entry '1379106' for key 'IDX_8e1f623798118e629b46a9e629'": "ER_DUP_ENTRY: Duplicate entry '1379106' for key 'IDX_8e1f623798118e629b46a9e629'",
+  "ER_DUP_ENTRY: Duplicate entry '13791067145' for key 'IDX_8e1f623798118e629b46a9e629'": "ER_DUP_ENTRY: Duplicate entry '13791067145' for key 'IDX_8e1f623798118e629b46a9e629'",
+  "ER_DUP_ENTRY: Duplicate entry '1379106715' for key 'IDX_8e1f623798118e629b46a9e629'": "ER_DUP_ENTRY: Duplicate entry '1379106715' for key 'IDX_8e1f623798118e629b46a9e629'",
+  "ER_DUP_ENTRY: Duplicate entry '137910675' for key 'IDX_8e1f623798118e629b46a9e629'": "ER_DUP_ENTRY: Duplicate entry '137910675' for key 'IDX_8e1f623798118e629b46a9e629'",
+  "Please enter a password of 6-20 characters": "Please enter a password of 6-20 characters",
+  "Please enter a valid email address": "Please enter a valid email address",
+  "Please enter a valid phone number": "Please enter a valid phone number",
+  "success register": "Successfully registered account"
+}

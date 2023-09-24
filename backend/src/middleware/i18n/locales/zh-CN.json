@@ -1,3 +1,10 @@
 {
-  "success register": "成功注册用户"
+  "ER_DUP_ENTRY: Duplicate entry '1379106' for key 'IDX_8e1f623798118e629b46a9e629'": "ER_DUP_ENTRY: Duplicate entry '1379106' for key 'IDX_8e1f623798118e629b46a9e629'",
+  "ER_DUP_ENTRY: Duplicate entry '13791067145' for key 'IDX_8e1f623798118e629b46a9e629'": "ER_DUP_ENTRY: Duplicate entry '13791067145' for key 'IDX_8e1f623798118e629b46a9e629'",
+  "ER_DUP_ENTRY: Duplicate entry '1379106715' for key 'IDX_8e1f623798118e629b46a9e629'": "ER_DUP_ENTRY: Duplicate entry '1379106715' for key 'IDX_8e1f623798118e629b46a9e629'",
+  "ER_DUP_ENTRY: Duplicate entry '137910675' for key 'IDX_8e1f623798118e629b46a9e629'": "ER_DUP_ENTRY: Duplicate entry '137910675' for key 'IDX_8e1f623798118e629b46a9e629'",
+  "Please enter a password of 6-20 characters": "请输入6-20个字符的密码",
+  "Please enter a valid email address": "请输入有效的邮箱地址",
+  "Please enter a valid phone number": "请输入有效的手机号码",
+  "success register": "成功注册账号"
 }

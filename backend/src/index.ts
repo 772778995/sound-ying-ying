@@ -23,13 +23,13 @@ const bootstrap = async () => {
 	router.use('/api', api.routes())
 	app.proxy = true
 	app
-		.use(i18nMiddleware)
-		.use(koaRange)
 		.use(error)
+		.use(koaRange)
 		.use(accessLogger())
 		.use(staticService)
 		.use(router.allowedMethods())
 		.use(koaBody({ multipart: true }))
+		.use(i18nMiddleware)
 		.use(response)
 		.use(router.routes())
 		.listen(54088, () => logger(`http://127.0.0.1:54088`))

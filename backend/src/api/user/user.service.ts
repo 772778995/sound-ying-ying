@@ -1,4 +1,5 @@
 import { User } from '@/db/entity/User'
+import saveData from '@/db/saveData'
 import { RegisterDto, LoginDto } from '@/typings/types'
 import { Middleware } from 'koa'
 
@@ -9,6 +10,7 @@ export const login: Middleware = async ctx => {
 
 /** @filter 注册 */
 export const register: Middleware = async ctx => {
-	await User.insert(ctx.request.body as RegisterDto)
+	const body = ctx.request.body as RegisterDto
+	await saveData(ctx, User.create(body))
 	ctx.return.success('success register')
 }

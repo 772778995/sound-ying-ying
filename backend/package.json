@@ -4,7 +4,7 @@
    "main": "index.js",
    "license": "MIT",
    "scripts": {
-      "dev": "nodemon --watch src -e ts,tsx --exec ts-node -r tsconfig-paths/register src/index.ts",
+      "dev": "nodemon --watch src -e ts,tsx,json --exec ts-node -r tsconfig-paths/register src/index.ts",
       "start": "ts-node -r tsconfig-paths/register src/index.ts",
       "update-api": "npx apifox-to-axios-ts update",
       "typeorm": "typeorm-ts-node-commonjs"

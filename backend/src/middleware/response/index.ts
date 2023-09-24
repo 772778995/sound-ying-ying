@@ -8,22 +8,22 @@ const responseMiddleware: Middleware = async (ctx, next) => {
 	}) as any
 
 	ctx.return.success = (response: any) => {
-		if (_.isString(response)) response = { msg: ctx.i18n(response), type: 'success' }
+		if (_.isString(response)) response = { msg: ctx.i18n.__(response), type: 'success' }
 		ctx.body = Object.assign({ code: HttpCode.OK, type: 'success' }, response)
 	}
 	ctx.return.warning = (response: any) => {
-		if (_.isString(response)) response = { msg: ctx.i18n(response), type: 'warning' }
+		if (_.isString(response)) response = { msg: ctx.i18n.__(response), type: 'warning' }
 		ctx.body = Object.assign({ code: HttpCode.OK, type: 'warning' }, response)
 	}
 	ctx.return.info = (response: any) => {
-		if (_.isString(response)) response = { msg: ctx.i18n(response), type: 'info' }
+		if (_.isString(response)) response = { msg: ctx.i18n.__(response), type: 'info' }
 		ctx.body = Object.assign({ code: HttpCode.OK, type: 'info' }, response)
 	}
 	ctx.return.error = (response: any) => {
 		if (_.isString(response)) {
 			ctx.body = {
 				code: HttpCode.BAD_REQUEST,
-				msg: ctx.i18n(response),
+				msg: ctx.i18n.__(response),
 				type: 'error'
 			}
 			return

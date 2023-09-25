@@ -1,6 +1,6 @@
 import { Length, IsEmail, IsMobilePhone } from 'class-validator'
 import { Entity, Column } from 'typeorm'
-import { BaseColumn } from './BaseColumn'
+import { BaseColumn } from '@/db/BaseColumn'
 
 @Entity()
 export class User extends BaseColumn {

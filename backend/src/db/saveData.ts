@@ -1,6 +1,6 @@
 import { validate } from 'class-validator'
 import { map } from 'lodash'
-import { BaseColumn } from './entity/BaseColumn'
+import { BaseColumn } from './BaseColumn'
 import { Context } from 'koa'
 
 export class ValidateError extends Error {

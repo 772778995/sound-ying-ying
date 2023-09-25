@@ -1,4 +1,4 @@
-import { User } from '@/db/entity/User'
+import { User } from '@/api/user/user.entity'
 import saveData from '@/db/saveData'
 import { RegisterDto, LoginDto } from '@/typings/types'
 import { Middleware } from 'koa'
@@ -11,6 +11,10 @@ export const login: Middleware = async ctx => {
 /** @filter 注册 */
 export const register: Middleware = async ctx => {
 	const body = ctx.request.body as RegisterDto
+
+	const isExist = await User.findOneBy({ phone: body.phone })
+	if (isExist) return ctx.return.error('The phone number has been registered')
+
 	await saveData(ctx, User.create(body))
 	ctx.return.success('success register')
 }

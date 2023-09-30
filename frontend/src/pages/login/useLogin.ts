@@ -1,3 +1,4 @@
+import api from '@/src/api'
 import localForage from '@/src/utils/localForage'
 
 type Props = {
@@ -13,14 +14,13 @@ export default (props: Props) => {
     password: ''
   })
 
-  const submit = async () => {
-    await localForage.setItem('token', '6'.repeat(32))
-    router.push('/')
+  const submitHandler = async () => {
+    await api.post('/user/login')
   }
 
   return {
     loginForm,
-    submit
+    submitHandler
   }
 }
 

@@ -1,7 +1,34 @@
+import { DefaultContext, DefaultContextExtends, DefaultState, ExtendableContext, Next } from 'koa'
 import { ApiDetails, Urls } from './apis'
+import { DeepMerge } from 'can-can-word-bug'
 
-/** @filter apifox 规定全部路由 */
-export type RoutePaths<M extends keyof Urls = 'all'> = Urls[M]
+type Context<Q, B> =
+	DeepMerge<
+		Omit<ExtendableContext, 'query' | 'request'>
+		& {
+			request: Omit<ExtendableContext['request'], 'body'> & { body: B }
+		}
+		& { state: DefaultState },
+		{ query: Q }
+	>
+
+/** 请求方式 */
+export type Method = keyof Urls
+export type RoutePaths<M extends Method = 'all'> = Urls[M]
+
+export type KoaRoutePath<M extends Method = 'all'> = RoutePaths<M> | RegExp
+export type KoaRoutePaths<M extends Method = 'all'> = KoaRoutePath<M> | KoaRoutePath<M>[]
+
+export type MiddleWare<M extends keyof ApiDetails, P extends KoaRoutePath> = (
+	// @ts-ignore
+	ctx: Context<ApiDetails[M][P]['params'], ApiDetails[M][P]['data']>,
+	next: Next
+) => any
+
+const a: MiddleWare<'post', '/user/login'> = ctx => {
+	// ctx.query.phone
+	ctx.request.body.phone
+}
 
 export type RegisterApi = ApiDetails['post']['/user/register']
 export type RegisterDto = RegisterApi['data']

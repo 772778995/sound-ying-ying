@@ -1,4 +1,3 @@
-import error from './middleware/error'
 import koaRange from 'koa-range'
 import Koa from 'koa'
 import koaStatic from 'koa-static'
@@ -9,7 +8,9 @@ import api from './api'
 import path from 'path'
 import response from './middleware/response'
 import { AppDataSource } from './db'
+import doneMiddleware from './middleware/done'
 import throwError from './util/throwError'
+import errorMiddle from './middleware/error'
 import i18nMiddleware from './middleware/i18n'
 
 const bootstrap = async () => {
@@ -23,7 +24,8 @@ const bootstrap = async () => {
 	router.use('/api', api.routes())
 	app.proxy = true
 	app
-		.use(error)
+		.use(doneMiddleware)
+		.use(errorMiddle)
 		.use(koaRange)
 		.use(accessLogger())
 		.use(staticService)

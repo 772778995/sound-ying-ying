@@ -13,7 +13,7 @@ export const register: Middleware = async ctx => {
 	const body = ctx.request.body as RegisterDto
 	ctx.query
 	const isExist = await User.findOneBy({ phone: body.phone })
-	if (isExist) return ctx.return.error('The phone number has been registered')
+	if (isExist) ctx.return.error('The phone number has been registered')
 
 	await saveData(ctx, User.create(body))
 	ctx.return.success('success register')

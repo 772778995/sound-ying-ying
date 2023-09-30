@@ -11,6 +11,9 @@ declare module 'koa' {
 	interface ExtendableContext {
 		i18n: I18n
 
+		/** @filter 结束响应 */
+		done: () => never
+
 		/** @filter 基础响应，无返回提示消息 */
 		return: {
 			(

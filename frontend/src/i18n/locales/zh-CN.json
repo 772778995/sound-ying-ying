@@ -1,22 +1,6 @@
 {
-  "ask-confirm-quit": "确定退出程序？",
-  "at-least": "至少",
-  "at-most": "至多",
-  "characters": "个字符",
-  "hello-quasar": "你好 quasra!",
-  "home": "首页",
-  "illegal-URL": "非法的URL",
-  "illegal-date": "非法的日期",
-  "illegal-email-format": "非法的邮箱格式",
-  "illegal-hex-color": "非法的十六进制颜色",
-  "loading": "加载中…",
-  "logout": "退出登录",
-  "minimize": "最小化",
-  "must-be": "必须是",
-  "please-download-client": "请下载客户端",
-  "quit": "退出",
-  "request-error": "请求失败",
-  "requesting": "请求中…",
-  "this-item-is-required": "该项是必填项",
-  "web-side-not-supported": "web 端不支持"
+  "account": "账号",
+  "Please enter at least 6 characters": "请输入至少6个字符",
+  "Please enter your account": "请输入您的账号"
 }
+

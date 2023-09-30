@@ -2,6 +2,7 @@ import _Axios from 'axios'
 import { AxiosStatic } from '@/src/typings/axios'
 import i18n from '@/src/i18n'
 import { Notify } from 'quasar'
+import throwError from '../utils/throwError'
 
 const t = i18n.global.t
 const Axios = _Axios as AxiosStatic
@@ -24,11 +25,7 @@ api.interceptors.response.use(
     reqs.value--
     const errMsg =
       err.response?.data?.error_msg || err.response?.data?.message || t('request-error')
-    Notify.create({
-      position: 'top-right',
-      type: 'negative',
-      message: errMsg
-    })
+    throwError(errMsg)
     throw new Error(errMsg)
   }
 )

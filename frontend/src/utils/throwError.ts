@@ -7,6 +7,7 @@ const throwError = (err: string | Error) => {
   else errMsg = err.message || JSON.stringify(err)
   Notify.create({
     type: 'negative',
+    icon: 'announcement',
     message: errMsg
   })
   throw new Error(errMsg)

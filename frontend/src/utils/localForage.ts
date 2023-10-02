@@ -1,7 +1,7 @@
 import { getLocalForage } from 'can-can-word-bug'
 
 export default getLocalForage<{
-  /** 登录令牌 */
-  token: string
+  /** 上一次发送短信时间戳 */
+  lastSendSmsCodeTime: number
 }>()
 

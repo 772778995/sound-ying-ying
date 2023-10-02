@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 // TypeScript Version: 4.1
 import { Urls, ApiDetails } from './apis'
 
@@ -380,26 +381,13 @@ export interface CreateAxiosDefaults<D = any>
 }
 
 // export interface AxiosResponse<T = any, D = any> {
-// 	data: T
-// 	status: number
-// 	statusText: string
-// 	headers: RawAxiosResponseHeaders | AxiosResponseHeaders
-// 	config: AxiosRequestConfig<D>
-// 	request?: any
+//   data: T
+//   status: number
+//   statusText: string
+//   headers: RawAxiosResponseHeaders | AxiosResponseHeaders
+//   config: AxiosRequestConfig<D>
+//   request?: any
 // }
-export type AxiosResponse<
-  T = any,
-  D = any
-> = AxiosRequestConfig<D>['filterResponse'] extends false
-  ? {
-      data: T
-      status: number
-      statusText: string
-      headers: RawAxiosResponseHeaders | AxiosResponseHeaders
-      config: AxiosRequestConfig<D>
-      request?: any
-    }
-  : T['data']
 
 export class AxiosError<T = unknown, D = any> extends Error {
   constructor(

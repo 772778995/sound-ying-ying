@@ -1,63 +1,68 @@
 <script setup lang="ts">
+import { isMobilePhone } from 'class-validator'
 import useLogin from './useLogin'
 
-const { loginForm, submitHandler } = useLogin({})
+const { loginForm, isLoginLoading, loginHandler } = useLogin()
 </script>
 
 <template>
   <div _flex="~">
-    <q-form _m="auto" _w="max-500px min-350px" _space="y-20px" @submit="submitHandler">
+    <q-form _m="auto" _w="80vw max-350px" _space="y-10px" @submit="loginHandler">
       <q-input
-        v-model="loginForm.account"
-        :label="$t('account')"
+        v-model="loginForm.phone"
+        :label="$t('phone')"
+        maxlength="11"
         outlined
         lazy-rules
+        :rules="[v => isMobilePhone(v, 'zh-CN') || $t('Please enter your phone')]"
+      />
+
+      <div _flex="~">
+        <div _flex="1">
+          <q-input
+            v-model="loginForm.smsCode"
+            :label="$t('SMS code')"
+            outlined
+            maxlength="6"
+            lazy-rules
+            :rules="[
+              v => /\d{6}/.test(v) || $t('Please enter a 6-digit verification code')
+            ]"
+          />
+        </div>
+
+        <q-btn _w="140px" _m="l-20px" _h="56px" color="primary" icon="email" loading>
+          {{ $t('Send SMS') }}
+          <template v-slot:loading>
+            <q-spinner-hourglass class="on-left" />
+            请稍后…
+          </template>
+        </q-btn>
+      </div>
+
+      <q-input
+        v-model="loginForm.psd"
+        :label="$t('psd')"
         maxlength="20"
+        outlined
+        lazy-rules
+        type="password"
         :rules="[
-          v => v.length || $t('Please enter your account'),
-          v => v.length > 6 || $t('Please enter at least 6 characters')
+          v => v.length >= 6 || $t('Please enter a password of at least 6 characters')
         ]"
       />
-      <div>
-        <q-btn label="Submit" type="submit" />
-        <q-btn label="Reset" type="reset" flat />
-      </div>
+
+      <q-btn
+        :loading="isLoginLoading"
+        :label="$t('login')"
+        icon="person"
+        color="primary"
+        _m="!t-20px"
+        _w="full"
+        _h="54px"
+        type="submit"
+      />
     </q-form>
-    <!-- <q-card _w="80vw min-375px max-500px" _m="auto" _p="10px">
-      <q-form @submit="submit">
-        <q-card-section>
-          <div _text="3xl">登录</div>
-        </q-card-section>
-
-        <q-card-section _space="y-10px">
-          <q-input
-            v-model="loginForm.account"
-            label="账号"
-            lazy-rules
-            filled
-            :rules="[
-              v => v.length || '请输入您的账号',
-              v => v.length > 6 || '请输入至少6个字符'
-            ]"
-          />
-
-          <q-input
-            v-model="loginForm.password"
-            label="密码"
-            lazy-rules
-            filled
-            :rules="[
-              v => v.length || '请输入您的密码',
-              v => v.length > 6 || '请输入至少6个字符'
-            ]"
-          />
-        </q-card-section>
-
-        <q-card-section>
-          <q-btn type="submit" size="lg" push _w="full">登录</q-btn>
-        </q-card-section>
-      </q-form>
-    </q-card> -->
   </div>
 </template>
 

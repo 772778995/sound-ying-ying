@@ -27,6 +27,7 @@
     "axios": "^0.21.1",
     "blob-util": "^2.0.2",
     "can-can-word-bug": "^0.2.0",
+    "class-validator": "^0.14.0",
     "dayjs": "^1.11.7",
     "electron": "^23.1.0",
     "lodash": "^4.17.21",

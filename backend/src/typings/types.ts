@@ -24,14 +24,3 @@ export type MiddleWare<M extends keyof ApiDetails, P extends KoaRoutePath> = (
 	ctx: Context<ApiDetails[M][P]['params'], ApiDetails[M][P]['data']>,
 	next: Next
 ) => any
-
-const a: MiddleWare<'post', '/user/login'> = ctx => {
-	// ctx.query.phone
-	ctx.request.body.phone
-}
-
-export type RegisterApi = ApiDetails['post']['/user/register']
-export type RegisterDto = RegisterApi['data']
-
-export type LoginApi = ApiDetails['post']['/user/login']
-export type LoginDto = LoginApi['data']

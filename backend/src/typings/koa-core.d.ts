@@ -9,6 +9,8 @@ type Locale = typeof locale
 
 declare module 'koa' {
 	interface ExtendableContext {
+		validate: <T>(classObj: T, obj: any) => Promise<T>
+
 		i18n: I18n
 
 		/** @filter 结束响应 */
@@ -27,13 +29,13 @@ declare module 'koa' {
 			success: (
 				response:
 					| {
-						/** @filter 响应状态码 @default HttpCode.OK */
-						code?: HttpCode
-						/** @filter 响应内容 */
-						data?: any
-						/** @filter 前端成功提示信息 */
-						msg: string
-					}
+							/** @filter 响应状态码 @default HttpCode.OK */
+							code?: HttpCode
+							/** @filter 响应内容 */
+							data?: any
+							/** @filter 前端成功提示信息 */
+							msg: string
+					  }
 					/** @filter 前端成功提示信息 */
 					| string
 			) => any
@@ -42,13 +44,13 @@ declare module 'koa' {
 			info: (
 				response:
 					| {
-						/** @filter 响应状态码 @default HttpCode.OK */
-						code?: HttpCode
-						/** @filter 响应内容 */
-						data?: any
-						/** @filter 前端信息提示 */
-						msg: string
-					}
+							/** @filter 响应状态码 @default HttpCode.OK */
+							code?: HttpCode
+							/** @filter 响应内容 */
+							data?: any
+							/** @filter 前端信息提示 */
+							msg: string
+					  }
 					| string
 			) => any
 
@@ -56,13 +58,13 @@ declare module 'koa' {
 			warning: (
 				response:
 					| {
-						/** @filter 响应状态码 @default HttpCode.OK */
-						code?: HttpCode
-						/** @filter 响应内容 */
-						data?: any
-						/** @filter 前端警告信息提示 */
-						msg: string
-					}
+							/** @filter 响应状态码 @default HttpCode.OK */
+							code?: HttpCode
+							/** @filter 响应内容 */
+							data?: any
+							/** @filter 前端警告信息提示 */
+							msg: string
+					  }
 					| string
 			) => any
 
@@ -70,13 +72,13 @@ declare module 'koa' {
 			error: (
 				response:
 					| {
-						/** @filter 响应状态码 @default HttpCode.BAD_REQUEST */
-						code?: HttpCode
-						/** @filter 响应内容 */
-						data?: any
-						/** @filter 前端错误信息提示 */
-						msg: string
-					}
+							/** @filter 响应状态码 @default HttpCode.BAD_REQUEST */
+							code?: HttpCode
+							/** @filter 响应内容 */
+							data?: any
+							/** @filter 前端错误信息提示 */
+							msg: string
+					  }
 					| string
 			) => any
 		}

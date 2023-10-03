@@ -8,10 +8,12 @@ import api from './api'
 import path from 'path'
 import response from './middleware/response'
 import { AppDataSource } from './db'
+import koaCros from 'koa2-cors'
 import doneMiddleware from './middleware/done'
 import throwError from './util/throwError'
 import errorMiddle from './middleware/error'
 import i18nMiddleware from './middleware/i18n'
+import validateMiddleware from './middleware/validate'
 
 const bootstrap = async () => {
 	await AppDataSource.initialize()
@@ -24,6 +26,7 @@ const bootstrap = async () => {
 	router.use('/api', api.routes())
 	app.proxy = true
 	app
+		.use(koaCros())
 		.use(doneMiddleware)
 		.use(errorMiddle)
 		.use(koaRange)
@@ -32,6 +35,7 @@ const bootstrap = async () => {
 		.use(router.allowedMethods())
 		.use(koaBody({ multipart: true }))
 		.use(i18nMiddleware)
+		.use(validateMiddleware)
 		.use(response)
 		.use(router.routes())
 		.listen(54088, () => logger(`http://127.0.0.1:54088`))

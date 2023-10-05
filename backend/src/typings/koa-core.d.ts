@@ -9,7 +9,7 @@ type Locale = typeof locale
 
 declare module 'koa' {
 	interface ExtendableContext {
-		validate: <T>(classObj: T, obj: any) => Promise<T>
+		validate: <T>(classObj: T, obj: any) => Promise<InstanceType<T>>
 
 		i18n: I18n
 

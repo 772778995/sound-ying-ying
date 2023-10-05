@@ -1,244 +1,246 @@
 /* eslint-disable */
 
 export type Urls = {
-	post: '/user/register' | '/user/login' | '/send-sms' | '/demo/create' | '/demo/update'
-	get: '/check-phone' | '/demo/list' | '/demo/find' | '/demo/delete'
-	all: Urls['post'] | Urls['get']
-}
+  post:
+    | "/login/phone/psd"
+    | "/login/phone/code"
+    | "/login/email/psd"
+    | "/login/email/code"
+    | "/register/email"
+    | "/register/phone"
+    | "/send-code/sms"
+    | "/send-code/email";
+  all: Urls["post"];
+};
 
 export type RefSchema = {
-	code: number
+  code: number;
 
-	resMsgType: string
+  resMsgType: string;
 
-	resSchema: {
-		/**
-		 * @description 响应状态码
-		 */
-		code: RefSchema['code']
-		/**
-		 * @description 响应消息类型
-		 */
-		type?: RefSchema['resMsgType']
-		/**
-		 * @description 前端提示消息，type 值为空则不显示
-		 */
-		msg: string
-	}
-}
+  psd: string;
+
+  resSchema: {
+    /**
+     * @description 响应状态码
+     */
+    code: RefSchema["code"];
+    /**
+     * @description 响应消息类型
+     */
+    type?: RefSchema["resMsgType"];
+    /**
+     * @description 前端提示消息，type 值为空则不显示
+     */
+    msg?: string;
+  };
+
+  email: string;
+
+  code: string;
+
+  phone: string;
+};
+
 type ApiDetails = {
-	post: {
-		/**
-		 * 注册
-		 * @status developing
-		 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202
-		 */
-		'/user/register': {
-			contentType: 'application/json'
-			params: never
+  post: {
+    /**
+     * 手机号密码登录
+     * @status developing
+     * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108402061
+     */
+    "/login/phone/psd": {
+      contentType: "application/json";
+      params: never;
 
-			data: {
-				/**
-				 * @description 手机号码
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202
-				 */
-				phone: string
-				/**
-				 * @description 密码，6-12位
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202
-				 */
-				psd: string
-				/**
-				 * @description 短信验证码，6位数字（测试：000000）
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202
-				 */
-				smsCode: string
-			}
+      data: {
+        /**
+         * @description 密码，6-20位
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108402061
+         */
+        psd: RefSchema["psd"];
+        /**
+         * @description 手机号
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108402061
+         */
+        phone: RefSchema["phone"];
+      };
 
-			response: {}
-		}
+      response: RefSchema["resSchema"];
+    };
 
-		/**
-		 * 登录
-		 * @status developing
-		 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108402061
-		 */
-		'/user/login': {
-			contentType: 'application/json'
-			params: never
+    /**
+     * 手机号验证码登录
+     * @status developing
+     * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326060
+     */
+    "/login/phone/code": {
+      contentType: "application/json";
+      params: never;
 
-			data: {
-				/**
-				 * @description 密码，6-12位
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108402061
-				 */
-				psd?: string
-				/**
-				 * @description 短信验证码，6位数字（测试：000000）
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108402061
-				 */
-				smsCode?: string
-				/**
-				 * @description 手机号
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108402061
-				 */
-				phone: string
-			}
+      data: {
+        /**
+         * @description 手机号
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326060
+         */
+        phone: RefSchema["phone"];
+        /**
+         * @description 验证码，6位数字，测试：000000
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326060
+         */
+        smsCode: RefSchema["code"];
+      };
 
-			response: RefSchema['resSchema']
-		}
+      response: {};
+    };
 
-		/**
-		 * 发送短信验证码
-		 * @status developing
-		 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-109377885
-		 */
-		'/send-sms': {
-			contentType: 'application/json'
-			params: never
+    /**
+     * 邮箱密码登录
+     * @status developing
+     * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326067
+     */
+    "/login/email/psd": {
+      contentType: "application/json";
+      params: never;
 
-			data: {
-				/**
-				 * @description 1：注册，2：登录
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-109377885
-				 */
-				type?: number
-				/**
-				 * @description 手机号码
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-109377885
-				 */
-				phone: string
-			}
+      data: {
+        /**
+         * @description 邮箱地址，最长255个字符
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326067
+         */
+        email: RefSchema["email"];
+        /**
+         * @description 密码，6-20位字符
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326067
+         */
+        psd: RefSchema["psd"];
+      };
 
-			response: {}
-		}
+      response: {};
+    };
 
-		/**
-		 * 创建
-		 * @status developing
-		 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-113407134
-		 */
-		'/demo/create': {
-			contentType: 'application/json'
-			params: never
+    /**
+     * 邮箱验证码登录
+     * @status developing
+     * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326072
+     */
+    "/login/email/code": {
+      contentType: "application/json";
+      params: never;
 
-			data: {
-				/**
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-113407134
-				 */
-				name: string
-			}
+      data: {
+        /**
+         * @description 邮箱地址，最长255个字符
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326072
+         */
+        email: RefSchema["email"];
+        /**
+         * @description 邮箱验证码
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326072
+         */
+        emailCode: RefSchema["code"];
+      };
 
-			response: {}
-		}
+      response: {};
+    };
 
-		/**
-		 * 更新
-		 * @status developing
-		 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-113407785
-		 */
-		'/demo/update': {
-			contentType: 'application/json'
-			params: never
+    /**
+     * 邮箱注册
+     * @status developing
+     * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202
+     */
+    "/register/email": {
+      contentType: "application/json";
+      params: never;
 
-			data: {
-				/**
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-113407785
-				 */
-				id: string
-				/**
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-113407785
-				 */
-				name: string
-			}
+      data: {
+        /**
+         * @description 密码，6-20位
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202
+         */
+        psd: RefSchema["psd"];
+        /**
+         * @description 邮箱地址
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202
+         */
+        email: RefSchema["email"];
+        /**
+         * @description 邮箱验证码，6位数字（测试：000000）
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202
+         */
+        emailCode: RefSchema["code"];
+      };
 
-			response: {}
-		}
-	}
+      response: {};
+    };
 
-	get: {
-		/**
-		 * 检查手机号码
-		 * @status developing
-		 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-109376969
-		 */
-		'/check-phone': {
-			contentType: 'none'
-			params: {
-				/**
-				 * @description 要检查的手机号码
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-109376969
-				 */
-				phone?: string
-			}
+    /**
+     * 手机号注册
+     * @status developing
+     * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326081
+     */
+    "/register/phone": {
+      contentType: "application/json";
+      params: never;
 
-			data: never
+      data: {
+        /**
+         * @description 密码，6-20位
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326081
+         */
+        psd: RefSchema["psd"];
+        /**
+         * @description 手机号码
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326081
+         */
+        phone: RefSchema["phone"];
+        /**
+         * @description 短信验证码，6位数字（测试：000000）
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326081
+         */
+        smsCode: RefSchema["code"];
+      };
 
-			response: {}
-		}
+      response: {};
+    };
 
-		/**
-		 * 查询列表
-		 * @status developing
-		 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-113407545
-		 */
-		'/demo/list': {
-			contentType: 'none'
-			params: {
-				/**
-				 * @description 页码
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-113407545
-				 */
-				page: number
-				/**
-				 * @description 单页数量
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-113407545
-				 */
-				pageSize: number
-			}
+    /**
+     * 发送手机短信验证码
+     * @status developing
+     * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-109377885
+     */
+    "/send-code/sms": {
+      contentType: "application/json";
+      params: never;
 
-			data: never
+      data: {
+        /**
+         * @description 手机号码
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-109377885
+         */
+        phone: RefSchema["phone"];
+      };
 
-			response: {}
-		}
+      response: {};
+    };
 
-		/**
-		 * 查询
-		 * @status developing
-		 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-113407665
-		 */
-		'/demo/find': {
-			contentType: 'none'
-			params: {
-				/**
-				 * @description 唯一ID
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-113407665
-				 */
-				id: string
-			}
+    /**
+     * 发送邮箱验证码
+     * @status developing
+     * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326083
+     */
+    "/send-code/email": {
+      contentType: "none";
+      params: never;
 
-			data: never
+      data: never;
 
-			response: {}
-		}
-
-		/**
-		 * 删除
-		 * @status developing
-		 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-113407959
-		 */
-		'/demo/delete': {
-			contentType: 'application/json'
-			params: never
-
-			data: {
-				/**
-				 * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-113407959
-				 */
-				id: string
-			}
-
-			response: {}
-		}
-	}
-}
+      response: {
+        /**
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326083
+         */
+        email: RefSchema["email"];
+      };
+    };
+  };
+};

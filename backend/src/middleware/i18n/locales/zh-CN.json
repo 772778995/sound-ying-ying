@@ -1,11 +1,15 @@
 {
-  "ER_DUP_ENTRY: Duplicate entry '1379106' for key 'IDX_8e1f623798118e629b46a9e629'": "ER_DUP_ENTRY: Duplicate entry '1379106' for key 'IDX_8e1f623798118e629b46a9e629'",
-  "ER_DUP_ENTRY: Duplicate entry '13791067145' for key 'IDX_8e1f623798118e629b46a9e629'": "ER_DUP_ENTRY: Duplicate entry '13791067145' for key 'IDX_8e1f623798118e629b46a9e629'",
-  "ER_DUP_ENTRY: Duplicate entry '1379106715' for key 'IDX_8e1f623798118e629b46a9e629'": "ER_DUP_ENTRY: Duplicate entry '1379106715' for key 'IDX_8e1f623798118e629b46a9e629'",
-  "ER_DUP_ENTRY: Duplicate entry '137910675' for key 'IDX_8e1f623798118e629b46a9e629'": "ER_DUP_ENTRY: Duplicate entry '137910675' for key 'IDX_8e1f623798118e629b46a9e629'",
+  "Email address is too long": "邮箱地址过长",
+  "Login exception": "登录异常",
+  "Please enter a 6-digit verification code": "请输入6位数字的验证码",
   "Please enter a password of 6-20 characters": "请输入6-20个字符的密码",
   "Please enter a valid email address": "请输入有效的邮箱地址",
   "Please enter a valid phone number": "请输入有效的手机号码",
+  "Please log in before proceeding": "请先登录再操作",
   "The phone number has been registered": "该手机号已被注册",
-  "success register": "成功注册账号"
+  "Verification code error": "验证码错误",
+  "success register": "成功注册账号",
+  "请输入有效的手机号码": "请输入有效的手机号码",
+  "请输入有效的手机号码<br/>请输入6-20个字符的密码": "请输入有效的手机号码<br/>请输入6-20个字符的密码",
+  "请输入有效的手机号码<br/>请输入6-20个字符的密码<br/>请输入6位数字的验证码<br/>请输入6位数字的验证码": "请输入有效的手机号码<br/>请输入6-20个字符的密码<br/>请输入6位数字的验证码<br/>请输入6位数字的验证码"
 }

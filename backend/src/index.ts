@@ -14,6 +14,7 @@ import throwError from './util/throwError'
 import errorMiddle from './middleware/error'
 import i18nMiddleware from './middleware/i18n'
 import validateMiddleware from './middleware/validate'
+import jwtMiddle from './middleware/jwt'
 
 const bootstrap = async () => {
 	await AppDataSource.initialize()
@@ -27,16 +28,17 @@ const bootstrap = async () => {
 	app.proxy = true
 	app
 		.use(koaCros())
+		.use(koaRange)
+		.use(staticService)
+		.use(response)
 		.use(doneMiddleware)
 		.use(errorMiddle)
-		.use(koaRange)
 		.use(accessLogger())
-		.use(staticService)
 		.use(router.allowedMethods())
 		.use(koaBody({ multipart: true }))
 		.use(i18nMiddleware)
 		.use(validateMiddleware)
-		.use(response)
+		.use(jwtMiddle)
 		.use(router.routes())
 		.listen(54088, () => logger(`http://127.0.0.1:54088`))
 		.on('error', err => throwError(`启动服务失败：${err.message}`))

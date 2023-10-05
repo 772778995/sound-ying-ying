@@ -1,15 +1,18 @@
 import { Length, IsEmail, IsMobilePhone } from 'class-validator'
-import { Entity, Column } from 'typeorm'
+import { Entity, Column, Index } from 'typeorm'
 import { BaseColumn } from '@/db/BaseColumn'
+import { UserEmailDto, UserPhoneDto, UserPsdDto } from './user.dto'
 
 @Entity()
-export class User extends BaseColumn {
+export class User extends BaseColumn implements UserPhoneDto, UserEmailDto, UserPsdDto {
 	/** @filter 手机号码 */
-	@Column({ unique: true, length: 11 })
+	@Index()
+	@Column({ length: 11, nullable: true })
 	@IsMobilePhone('zh-CN', {}, { message: 'Please enter a valid phone number' })
 	phone: string
 
 	/** @filter 邮箱地址 */
+	@Index()
 	@Column({ nullable: true })
 	@IsEmail({}, { message: 'Please enter a valid email address' })
 	email: string

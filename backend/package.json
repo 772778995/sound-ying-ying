@@ -13,6 +13,7 @@
       "@types/blueimp-md5": "^2.18.0",
       "@types/fs-extra": "^9.0.13",
       "@types/i18n": "^0.13.6",
+      "@types/jsonwebtoken": "^9.0.3",
       "@types/koa": "^2.13.4",
       "@types/koa-log4": "^2.3.3",
       "@types/koa-range": "^0.3.2",
@@ -41,8 +42,10 @@
       "dayjs": "^1.11.2",
       "fs-extra": "^10.0.0",
       "i18n": "^0.15.1",
+      "jsonwebtoken": "^9.0.2",
       "koa": "^2.13.4",
       "koa-body": "^4.2.0",
+      "koa-jwt": "^4.0.4",
       "koa-log4": "^2.3.2",
       "koa-range": "^0.3.0",
       "koa-router": "^10.1.1",
@@ -54,6 +57,7 @@
       "nodemailer": "^6.7.0",
       "qs": "^6.10.5",
       "reflect-metadata": "^0.1.13",
+      "ts-mixer": "^6.0.3",
       "typeorm": "0.3.17"
    }
 }

@@ -5,7 +5,7 @@ import { join } from 'path'
 const i18n = new I18n()
 i18n.configure({
 	locales: ['zh-CN', 'en-US'],
-	defaultLocale: 'en-US',
+	defaultLocale: 'zh-CN',
 	directory: join(__dirname, './locales')
 })
 

@@ -9,6 +9,12 @@
     "i18n-ally.keystyle": "flat",
     "i18n-ally.displayLanguage": "zh-CN",
     "i18n-ally.enabledParsers": ["json"],
-    "i18n-ally.enabledFrameworks": ["custom"]
+    "i18n-ally.enabledFrameworks": [
+      "custom"
+    ],
+    "i18n-ally.localesPaths": [
+      "src/middleware/i18n",
+      "src/middleware/i18n/locales"
+    ]
   }
 }

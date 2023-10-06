@@ -2,6 +2,8 @@
 import { isEmail } from 'class-validator'
 import useLogin from './useRegister'
 
+const emailInputRef = ref()
+
 const {
   leftSeconds,
   sendEmailCodeHandler,
@@ -10,7 +12,7 @@ const {
   registerForm,
   isRegisterLoading,
   registerHandler
-} = useLogin()
+} = useLogin({ emailInputRef })
 </script>
 
 <template>
@@ -18,6 +20,7 @@ const {
     <q-form _m="auto" _w="80vw max-350px" _space="y-10px" @submit="registerHandler">
       <template v-if="true">
         <q-input
+          ref="emailInputRef"
           v-model="registerForm.email"
           :label="$t('email')"
           maxlength="255"

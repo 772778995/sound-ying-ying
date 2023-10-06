@@ -2,13 +2,20 @@ import api from '@/src/api'
 import useRequest from '@/src/hooks/useRequest'
 import useSendEmail from '@/src/hooks/useSendEmail'
 import { ApiDetails } from '@/src/typings/apis'
+import { QInput } from 'quasar'
 
 type RegisterForm = //
   ApiDetails['post']['/register/email']['data'] &
     ApiDetails['post']['/register/phone']['data']
 
+type Props = {
+  emailInputRef: Ref<QInput>
+}
+
 // TODO 手机号短信验证码注册
-export default () => {
+export default (props: Props) => {
+  const { emailInputRef } = props
+
   const registerForm: Ref<RegisterForm> = ref({
     phone: '13790867170',
     email: '772778995@qq.com',
@@ -18,7 +25,9 @@ export default () => {
   })
 
   const { leftSeconds, sendEmailCode, isSendEmailCodeLoading } = useSendEmail()
-  const sendEmailCodeHandler = () => {
+  const sendEmailCodeHandler = async () => {
+    const isPass = await emailInputRef.value.validate()
+    if (!isPass) return
     sendEmailCode(registerForm.value.email)
   }
 

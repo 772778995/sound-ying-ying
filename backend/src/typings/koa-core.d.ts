@@ -4,12 +4,18 @@ import { HttpCode } from 'can-can-word-bug'
 import { RoutePaths } from './types'
 import locale from '@/middleware/i18n/locales/zh-CN.json'
 import { I18n } from 'i18n'
+import { BaseColumn } from '@/db/BaseColumn'
 
 type Locale = typeof locale
 
 declare module 'koa' {
 	interface ExtendableContext {
-		validate: <T>(classObj: T, obj: any) => Promise<InstanceType<T>>
+		validate: {
+			<T>(dto: T, obj: any): Promise<InstanceType<T>>
+			query: <T>(dto: T) => Promise<InstanceType<T>>
+			body: <T>(dto: T) => Promise<InstanceType<T>>
+			entity: <T extends BaseColumn, E extends InstanceType<T>>(entity: E) => Promise<E>
+		}
 
 		i18n: I18n
 

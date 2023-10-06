@@ -7,13 +7,13 @@ export abstract class BaseColumn extends BaseEntity {
 
 	/** @filter 创建时间 */
 	@CreateDateColumn()
-	readonly createDate: string
+	createDate: Date
 
 	/** @filter 更新时间 */
 	@UpdateDateColumn()
-	readonly updateDate: string
+	updateDate: Date
 
 	/** @filter 删除时间 */
 	@DeleteDateColumn()
-	readonly deleteDate: string
+	deleteDate: Date
 }

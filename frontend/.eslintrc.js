@@ -95,7 +95,6 @@ module.exports = {
     "@typescript-eslint/ban-types": "off",
     "vue/multi-word-component-names": "off",
     "quote-props": ["error", "as-needed"],
-    indent: ["error", 2],
     semi: ["error", "never"],
   },
 };

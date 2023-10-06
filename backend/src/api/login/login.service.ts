@@ -1,5 +1,5 @@
 import { Middleware } from 'koa'
-import { User } from '../user/user.entity'
+import { UserEntity } from '../user/user.entity'
 import { LoginByEmailCodeDto } from './login.dto'
 
 /** @filter 邮箱验证码登录 */

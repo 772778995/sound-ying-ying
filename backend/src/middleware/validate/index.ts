@@ -11,8 +11,8 @@ export class ValidateError extends Error {
 }
 
 const validateMiddleware: Middleware = async (ctx, next) => {
-	ctx.validate = async (classObj: any, obj: any) => {
-		const data = plainToClass(classObj, obj)
+	const ctxValidate = (async (dto: any, obj: any) => {
+		const data = plainToClass(dto, obj)
 		const errList = await validate(data)
 
 		if (!errList.length) return obj
@@ -24,7 +24,23 @@ const validateMiddleware: Middleware = async (ctx, next) => {
 			.join('<br/>')
 
 		ctx.return.error(errMsg)
+	}) as typeof ctx.validate
+
+	ctxValidate.query = dto => ctxValidate(dto, ctx.query)
+	ctxValidate.body = dto => ctxValidate(dto, ctx.request.body)
+	ctxValidate.entity = async entity => {
+		const errList = await validate(entity)
+		if (!errList.length) return entity
+
+		const errMsg = errList
+			.map(err => map(err.constraints))
+			.flat()
+			.map(msg => ctx.i18n.__(msg))
+			.join('<br/>')
+		throw new ValidateError(errMsg)
 	}
+
+	ctx.validate = ctxValidate
 	await next()
 }
 

@@ -4,7 +4,7 @@ import { BaseColumn } from '@/db/BaseColumn'
 import { UserEmailDto, UserPhoneDto, UserPsdDto } from './user.dto'
 
 @Entity()
-export class User extends BaseColumn implements UserPhoneDto, UserEmailDto, UserPsdDto {
+export class UserEntity extends BaseColumn implements UserPhoneDto, UserEmailDto, UserPsdDto {
 	/** @filter 手机号码 */
 	@Index()
 	@Column({ length: 11, nullable: true })

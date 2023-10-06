@@ -8,4 +8,4 @@ export class EmailCodeDto {
 	emailCode: string
 }
 
-export class SendEmailCodeDto extends Mixin(EmailCodeDto, UserEmailDto) {}
+export class SendEmailCodeDto extends UserEmailDto {}

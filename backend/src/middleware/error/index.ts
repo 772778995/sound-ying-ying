@@ -2,10 +2,10 @@ import { Middleware } from 'koa'
 import { systemLogger } from '@/logs/logger'
 import { HttpCode } from 'can-can-word-bug'
 import { QueryFailedError } from 'typeorm'
-import { ValidateError } from '@/db/saveData'
 import { Done } from '../done'
 import whiteApis from '@/api/white-apis'
 import { Urls } from '@/typings/apis'
+import { ValidateError } from '../validate'
 
 const errorMiddleware: Middleware = async (ctx, next) => {
 	try {

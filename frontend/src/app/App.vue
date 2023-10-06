@@ -6,7 +6,7 @@ import useSetting from '@/src/stores/useSetting'
 import vConsole from 'vconsole'
 
 if (process.env.NODE_ENV === 'development') {
-  new vConsole()
+  // new vConsole()
 }
 useInterceptExit()
 useIgnoreMouseEvents({

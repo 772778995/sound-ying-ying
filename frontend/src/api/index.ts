@@ -17,7 +17,7 @@ api.interceptors.response.use(
   config => {
     reqs.value--
     const msgType = {
-      positive: 'success',
+      success: 'positive',
       error: 'negative',
       warn: 'warning',
       info: 'info'
@@ -33,8 +33,8 @@ api.interceptors.response.use(
   },
   err => {
     reqs.value--
-    const code = err.code
-    const msg = err.message
+    const code = err.code || err.response?.status || 500
+    const msg = err.message || err.response?.data || err.response?.statusText
     const errMsg = `${code}：${msg}`
     throwError(errMsg)
     throw new Error(errMsg)

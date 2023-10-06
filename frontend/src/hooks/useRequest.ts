@@ -1,18 +1,18 @@
-const useRequest = <F extends () => Promise<any>>(fn: F) => {
+const useRequest = <F extends Function>(fn: F) => {
   const isLoading = ref(false)
   const isError = ref(false)
   const errMsg = ref('')
-  const request = () => {
+  const request = ((...arg: any) => {
     isLoading.value = true
     isError.value = false
     errMsg.value = ''
-    return fn()
+    return fn(...arg)
       .catch((err: Error) => {
         isError.value = true
         errMsg.value = err.message
       })
-      .finally(() => isLoading.value = false)
-  }
+      .finally(() => (isLoading.value = false))
+  }) as unknown as F
   return [
     /** 发起请求 */
     request,
@@ -24,3 +24,4 @@ const useRequest = <F extends () => Promise<any>>(fn: F) => {
 }
 
 export default useRequest
+

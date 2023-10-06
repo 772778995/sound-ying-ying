@@ -230,10 +230,15 @@ type ApiDetails = {
      * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326083
      */
     "/send-code/email": {
-      contentType: "none";
+      contentType: "application/json";
       params: never;
 
-      data: never;
+      data: {
+        /**
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326083
+         */
+        email: RefSchema["email"];
+      };
 
       response: {
         /**

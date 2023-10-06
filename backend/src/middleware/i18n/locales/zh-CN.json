@@ -1,15 +1,21 @@
 {
   "Email address is too long": "邮箱地址过长",
+  "Email or verification code error": "邮箱或验证码错误",
   "Login exception": "登录异常",
   "Please enter a 6-digit verification code": "请输入6位数字的验证码",
   "Please enter a password of 6-20 characters": "请输入6-20个字符的密码",
   "Please enter a valid email address": "请输入有效的邮箱地址",
   "Please enter a valid phone number": "请输入有效的手机号码",
   "Please log in before proceeding": "请先登录再操作",
+  "Please try again later": "请稍后再尝试",
+  "The email has been registered": "该邮箱已被注册",
   "The phone number has been registered": "该手机号已被注册",
+  "The verification code has been sent Please check it carefully": "已发送验证码，请注意查收",
   "Verification code error": "验证码错误",
+  "Your registration verification code: {{emailCode}}": "Your registration verification code: {{emailCode}}",
   "success register": "成功注册账号",
   "请输入有效的手机号码": "请输入有效的手机号码",
   "请输入有效的手机号码<br/>请输入6-20个字符的密码": "请输入有效的手机号码<br/>请输入6-20个字符的密码",
-  "请输入有效的手机号码<br/>请输入6-20个字符的密码<br/>请输入6位数字的验证码<br/>请输入6位数字的验证码": "请输入有效的手机号码<br/>请输入6-20个字符的密码<br/>请输入6位数字的验证码<br/>请输入6位数字的验证码"
+  "请输入有效的手机号码<br/>请输入6-20个字符的密码<br/>请输入6位数字的验证码<br/>请输入6位数字的验证码": "请输入有效的手机号码<br/>请输入6-20个字符的密码<br/>请输入6位数字的验证码<br/>请输入6位数字的验证码",
+  "邮箱地址过长<br/>请输入有效的邮箱地址": "邮箱地址过长<br/>请输入有效的邮箱地址"
 }

@@ -1,6 +1,6 @@
 import api from '@/src/api'
 import useRequest from '@/src/hooks/useRequest'
-import useSendEmail from '@/src/hooks/useSendEmail'
+import useSendEmail, { EmailCodeType } from '@/src/hooks/useSendEmail'
 import { ApiDetails } from '@/src/typings/apis'
 import { QInput } from 'quasar'
 
@@ -28,7 +28,7 @@ export default (props: Props) => {
   const sendEmailCodeHandler = async () => {
     const isPass = await emailInputRef.value.validate()
     if (!isPass) return
-    sendEmailCode(registerForm.value.email)
+    sendEmailCode(registerForm.value.email, EmailCodeType.Register)
   }
 
   const [register, isRegisterLoading] = useRequest(() =>

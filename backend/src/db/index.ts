@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import { UserEntity } from '@/api/user/user.entity'
-import { EmailCodeEntity } from '@/api/email-code/email-code.entity'
+import { User } from '@/api/user/user.entity'
+import { EmailCode } from '@/api/email-code/email-code.entity'
 
 export const AppDataSource = new DataSource({
 	type: 'mysql',
@@ -12,7 +12,7 @@ export const AppDataSource = new DataSource({
 	database: 'sound_ying_ying',
 	synchronize: true,
 	logging: false,
-	entities: [UserEntity, EmailCodeEntity],
+	entities: [User, EmailCode],
 	migrations: [],
 	subscribers: []
 })

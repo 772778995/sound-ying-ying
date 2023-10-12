@@ -1,61 +1,26 @@
 <script setup lang="ts">
-import { isMobilePhone, isEmail } from 'class-validator'
+import { isEmail } from 'class-validator'
 import useLogin from './useLogin'
 
-const { loginForm, isLoginLoading, loginHandler } = useLogin()
+const emailInputRef = ref()
+const {
+  leftSeconds,
+  isSendEmailCodeLoading,
+  sendEmailCodeHandler,
+  //
+  loginForm,
+  isLoginLoading,
+  loginHandler
+} = useLogin({ emailInputRef })
 </script>
 
 <template>
   <div _flex="~">
     <q-form _m="auto" _w="80vw max-350px" _space="y-10px" @submit="loginHandler">
-      <!-- 手机登录 -->
-      <template v-if="false">
-        <q-input
-          v-model="loginForm.phone"
-          :label="$t('phone')"
-          maxlength="11"
-          outlined
-          lazy-rules
-          :rules="[v => isMobilePhone(v, 'zh-CN') || $t('Please enter your phone')]"
-        />
-        <div _flex="~">
-          <div _flex="1">
-            <q-input
-              v-model="loginForm.smsCode"
-              :label="$t('SMS code')"
-              outlined
-              maxlength="6"
-              lazy-rules
-              :rules="[
-                v => /\d{6}/.test(v) || $t('Please enter a 6-digit verification code')
-              ]"
-            />
-          </div>
-
-          <q-btn _w="140px" _m="l-20px" _h="56px" color="primary" icon="email" loading>
-            {{ $t('Send SMS') }}
-            <template v-slot:loading>
-              <q-spinner-hourglass class="on-left" />
-              请稍后…
-            </template>
-          </q-btn>
-        </div>
-        <q-input
-          v-model="loginForm.psd"
-          :label="$t('psd')"
-          maxlength="20"
-          outlined
-          lazy-rules
-          type="password"
-          :rules="[
-            v => v.length >= 6 || $t('Please enter a password of at least 6 characters')
-          ]"
-        />
-      </template>
-
       <template v-if="true">
         <q-input
           v-model="loginForm.email"
+          ref="emailInputRef"
           :label="$t('email')"
           maxlength="255"
           outlined
@@ -82,12 +47,13 @@ const { loginForm, isLoginLoading, loginHandler } = useLogin()
             _h="56px"
             color="primary"
             icon="email"
-            :loading="false"
+            :loading="leftSeconds > 0 || isSendEmailCodeLoading"
+            @click="sendEmailCodeHandler"
           >
-            {{ $t('Send Email Code') }}
-            <template v-slot:loading>
-              <q-spinner-hourglass class="on-left" />
-              请稍后…
+            <div _m="l-10px">{{ $t('Send Email Code') }}</div>
+            <template v-if="leftSeconds > 0" v-slot:loading>
+              <q-spinner-hourglass />
+              <div _m="l-10px">{{ leftSeconds }}</div>
             </template>
           </q-btn>
         </div>

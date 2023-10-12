@@ -52,6 +52,7 @@ declare module '@/src/typings/axios' {
   //   config: AxiosRequestConfig<D>
   //   request?: any
   // }
-  export type AxiosResponse<T> = T
+  // @ts-ignore
+  export type AxiosResponse<T> = T['data']
 }
 

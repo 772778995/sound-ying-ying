@@ -1,12 +1,12 @@
-import { IsEmail, IsNumberString, Length } from 'class-validator'
+import { IsEmail, IsNumber, IsNumberString, Length } from 'class-validator'
 import { Entity, Column, Index } from 'typeorm'
 import { BaseColumn } from '@/db/BaseColumn'
-import { EmailCodeDto } from './email-code.dto'
+import { EmailCodeDto, EmailCodeType, EmailCodeTypeDto } from './email-code.dto'
 import { UserEmailDto } from '../user/user.dto'
 import dayjs from 'dayjs'
 
 @Entity()
-export class EmailCodeEntity extends BaseColumn implements UserEmailDto, EmailCodeDto {
+export class EmailCode extends BaseColumn implements UserEmailDto, EmailCodeDto, EmailCodeTypeDto {
 	/** @filter 邮箱地址 */
 	@Index()
 	@Column()
@@ -20,6 +20,11 @@ export class EmailCodeEntity extends BaseColumn implements UserEmailDto, EmailCo
 	@Length(6, undefined, { message: 'Please enter a 6-digit verification code' })
 	emailCode: string
 
+	/** @filter 验证码类型 */
+	@Column()
+	@IsNumber()
+	type: EmailCodeType
+
 	/** @filter 检查一分钟内是否有记录 */
 	static async checkRecentEmailRecord(email: string): Promise<boolean> {
 		const oneMinAgo = new Date(dayjs().subtract(1, 'm').valueOf())
@@ -32,15 +37,16 @@ export class EmailCodeEntity extends BaseColumn implements UserEmailDto, EmailCo
 		return !!res
 	}
 
-	static async findOneByInTenMin(search: { email: string; emailCode: string }) {
+	static async findOneByInTenMin(search: { email: string; emailCode: string; type: EmailCodeType }) {
 		const { email, emailCode } = search
 		const tenMinAgo = new Date(dayjs().add(10, 'm').valueOf())
 
 		const res = await this.createQueryBuilder('emailCode')
-			.where('emailCode.email = :email', { email })
-			.andWhere('emailCode.emailCode = :emailCode', { emailCode })
+			.where({ email, emailCode })
 			.andWhere('emailCode.createDate <= :tenMinAgo', { tenMinAgo })
 			.getOne()
+
+		if (res) await res.softRemove()
 
 		return res
 	}

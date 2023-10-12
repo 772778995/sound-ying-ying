@@ -4,9 +4,10 @@ import useInterceptExit from './useInterceptExit'
 import useIgnoreMouseEvents from './useIgnoreMouseEvents'
 import useSetting from '@/src/stores/useSetting'
 import vConsole from 'vconsole'
+import getIsMobile from 'is-mobile'
 
 if (process.env.NODE_ENV === 'development') {
-  // new vConsole()
+  if (getIsMobile()) new vConsole()
 }
 useInterceptExit()
 useIgnoreMouseEvents({

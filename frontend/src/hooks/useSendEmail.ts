@@ -2,6 +2,11 @@ import localForage from '../utils/localForage'
 import api from '../api'
 import useRequest from './useRequest'
 
+export enum EmailCodeType {
+  Register,
+  Login
+}
+
 const useSendEmail = () => {
   const lastSendEmailCodeTime = ref(0)
   onMounted(async () => {
@@ -25,12 +30,14 @@ const useSendEmail = () => {
 
   watch(lastSendEmailCodeTime, countDown)
 
-  const [sendEmailCode, isSendEmailCodeLoading] = useRequest(async (email: string) => {
-    await api.post('/send-code/email', { email })
-    lastSendEmailCodeTime.value = Date.now()
-    localForage.setItem('lastSendEmailCodeTime', lastSendEmailCodeTime.value)
-    leftSeconds.value = 60
-  })
+  const [sendEmailCode, isSendEmailCodeLoading] = useRequest(
+    async (email: string, type: EmailCodeType) => {
+      await api.post('/send-code/email', { email, type })
+      lastSendEmailCodeTime.value = Date.now()
+      localForage.setItem('lastSendEmailCodeTime', lastSendEmailCodeTime.value)
+      leftSeconds.value = 60
+    }
+  )
 
   return {
     leftSeconds,

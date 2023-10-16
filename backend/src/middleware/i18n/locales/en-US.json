@@ -1,7 +1,23 @@
 {
-	"Please enter a password of 6-20 characters": "Please enter a password of 6-20 characters",
-	"Please enter a valid email address": "Please enter a valid email address",
-	"Please enter a valid phone number": "Please enter a valid phone number",
-	"success register": "Successfully registered account",
-	"Please enter a 6-digit verification code": "Please enter a 6-digit verification code"
+  "Email address is too long": "Email address is too long",
+  "Email or password error": "Mail or password is incorrect",
+  "Email or verification code error": "Wrong email or verification code",
+  "Login exception": "Login exception",
+  "Login successful": "login successful",
+  "Please enter a 6-digit verification code": "Please enter a 6-digit verification code",
+  "Please enter a password of 6-20 characters": "Please enter a password of 6-20 characters",
+  "Please enter a valid email address": "Please enter a valid email address",
+  "Please enter a valid phone number": "Please enter a valid phone number",
+  "Please log in before proceeding": "Please log in first before operating",
+  "Please provide a valid verification code type": "Please provide a valid verification code type",
+  "Please try again later": "Please try again later",
+  "The email has been registered": "This email address has been registered",
+  "The phone number has been registered": "This mobile number has been registered",
+  "The verification code has been sent Please check it carefully": "Verification code has been sent, please check it",
+  "User does not exist": "User does not exist",
+  "Verification code error": "Verification code error",
+  "Your login verification code: {{emailCode}}": "Your login code: {{emailCode}}",
+  "Your registration verification code: {{emailCode}}": "Your registration verification code: {{emailCode}}",
+  "success register": "Successfully registered account",
+  "type must be a number conforming to the specified constraints": "type must be a number conforming to the specified constraints"
 }

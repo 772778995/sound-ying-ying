@@ -17,6 +17,7 @@
 	"User does not exist": "用户不存在",
 	"Verification code error": "验证码错误",
 	"Your registration verification code: {{emailCode}}": "您的注册验证码：{{emailCode}}",
+	"Your login verification code: {{emailCode}}": "您的登录证码：{{emailCode}}",
 	"success register": "成功注册账号",
 	"type must be a number conforming to the specified constraints": "type must be a number conforming to the specified constraints"
 }

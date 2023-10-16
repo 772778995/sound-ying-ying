@@ -22,7 +22,10 @@ declare module 'koa-router' {
 	import { RoutePaths, MiddleWare } from '@/typings/types'
 	import { Urls } from './apis'
 
-	type KoaRoutePath<M extends keyof Urls = 'all'> = RoutePaths<M> | RegExp
+	type TransformPath<T extends string> = T extends `${infer Before}/{${infer Param}}${infer After}`
+		? `${Before}/:${Param}${After}`
+		: T
+	type KoaRoutePath<M extends keyof Urls = 'all'> = TransformPath<RoutePaths<M>> | RegExp
 	type KoaRoutePaths<M extends keyof Urls = 'all'> = KoaRoutePath<M> | KoaRoutePath<M>[]
 
 	declare namespace Router {
@@ -72,7 +75,7 @@ declare module 'koa-router' {
 
 		// For backward compatibility IRouterContext needs to be an interface
 		// But it's deprecated - please use `RouterContext` instead
-		export interface IRouterContext extends RouterContext { }
+		export interface IRouterContext extends RouterContext {}
 
 		export type IMiddleware<StateT = any, CustomT = {}> = Koa.Middleware<
 			StateT,
@@ -194,228 +197,257 @@ declare module 'koa-router' {
 			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
 		): Router<StateT, CustomT>
 
-		/**
-		 * HTTP get method
-		 */
-		get<M extends 'get', P extends KoaRoutePath<M>>(
+		get(
 			name: string,
-			path: P,
-			...middleware: MiddleWare<M, P>[]
+			path: KoaRoutePath<'get'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
 		): Router<StateT, CustomT>
-		get<M extends 'get', P extends KoaRoutePaths<M>>(
-			path: P,
-			...middleware: MiddleWare<M, P>[]
-		): Router<StateT, CustomT>
-		// get<T, U>(
-		// 	name: string,
-		// 	path: KoaRoutePath<'get'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
-		// get<T, U>(
-		// 	path: KoaRoutePaths<'get'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
+		get(path: KoaRoutePaths<'get'>, ...middleware: Array<Router.IMiddleware<StateT, CustomT>>): Router<StateT, CustomT>
+		get<T, U>(
+			name: string,
+			path: KoaRoutePath<'get'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
+		get<T, U>(
+			path: KoaRoutePaths<'get'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
 
 		/**
 		 * HTTP post method
 		 */
-		post<M extends 'post', P extends KoaRoutePath<M>>(
+		post(
 			name: string,
-			path: P,
-			...middleware: MiddleWare<M, P>[]
+			path: KoaRoutePath<'post'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
 		): Router<StateT, CustomT>
-		post<M extends 'post', P extends KoaRoutePaths<M>>(
-			path: P,
-			...middleware: MiddleWare<M, P>[]
+		post(
+			path: KoaRoutePaths<'post'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
 		): Router<StateT, CustomT>
-		// post<T, U>(
-		// 	name: string,
-		// 	path: KoaRoutePath<'post'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
-		// post<T, U>(
-		// 	path: KoaRoutePaths<'post'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
+		post<T, U>(
+			name: string,
+			path: KoaRoutePath<'post'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
+		post<T, U>(
+			path: KoaRoutePaths<'post'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
 
 		/**
 		 * HTTP put method
 		 */
-		put<M extends 'put', P extends KoaRoutePath<M>>(
+		put(
 			name: string,
-			path: P,
-			...middleware: MiddleWare<M, P>[]
+			path: KoaRoutePath<'put'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
 		): Router<StateT, CustomT>
-		put<M extends 'put', P extends KoaRoutePaths<M>>(
-			path: P,
-			...middleware: MiddleWare<M, P>[]
-		): Router<StateT, CustomT>
-		// put<T, U>(
-		// 	name: string,
-		// 	path: KoaRoutePath<'put'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
-		// put<T, U>(
-		// 	path: KoaRoutePaths<'put'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
+		put(path: KoaRoutePaths<'put'>, ...middleware: Array<Router.IMiddleware<StateT, CustomT>>): Router<StateT, CustomT>
+		put<T, U>(
+			name: string,
+			path: KoaRoutePath<'put'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
+		put<T, U>(
+			path: KoaRoutePaths<'put'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
 
 		/**
 		 * HTTP link method
 		 */
-		link<M extends 'link', P extends KoaRoutePath<M>>(
+		link(
 			name: string,
-			path: KoaRoutePath<M>,
-			...middleware: MiddleWare<M, P>[]
+			path: KoaRoutePath<'link'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
 		): Router<StateT, CustomT>
-		link<M extends 'link', P extends KoaRoutePaths<M>>(
-			path: P,
-			...middleware: MiddleWare<M, P>[]
+		link(
+			path: KoaRoutePaths<'link'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
 		): Router<StateT, CustomT>
-		// link<T, U>(
-		// 	name: string,
-		// 	path: KoaRoutePath<'link'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
-		// link<T, U>(
-		// 	path: KoaRoutePaths<'link'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
+		link<T, U>(
+			name: string,
+			path: KoaRoutePath<'link'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
+		link<T, U>(
+			path: KoaRoutePaths<'link'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
 
 		/**
 		 * HTTP unlink method
 		 */
-		unlink<M extends 'unlink', P extends KoaRoutePath<M>>(
+		unlink(
 			name: string,
-			path: P,
-			...middleware: MiddleWare<M, P>[]
+			path: KoaRoutePath<'unlink'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
 		): Router<StateT, CustomT>
-		unlink<M extends 'link', P extends KoaRoutePaths<M>>(path: P, ...middleware: MiddleWare<M, P>[]): Router<StateT, CustomT>
-		// unlink<T, U>(
-		// 	name: string,
-		// 	path: KoaRoutePath<'unlink'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
-		// unlink<T, U>(
-		// 	path: KoaRoutePaths<'unlink'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
+		unlink(
+			path: KoaRoutePaths<'unlink'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
+		): Router<StateT, CustomT>
+		unlink<T, U>(
+			name: string,
+			path: KoaRoutePath<'unlink'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
+		unlink<T, U>(
+			path: KoaRoutePaths<'unlink'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
 
 		/**
 		 * HTTP delete method
 		 */
-		delete<M extends 'delete' | 'del', P extends KoaRoutePath<M>>(
+		delete(
 			name: string,
-			path: P,
-			...middleware: MiddleWare<M, P>[]
+			path: KoaRoutePath<'delete' | 'del'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
 		): Router<StateT, CustomT>
-		delete<M extends 'delete' | 'del', P extends KoaRoutePaths<M>>(path: P, ...middleware: MiddleWare<M, P>[]): Router<StateT, CustomT>
-		// delete<T, U>(
-		// 	name: string,
-		// 	path: KoaRoutePath<'delete' | 'del'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
-		// delete<T, U>(
-		// 	path: KoaRoutePaths<'delete' | 'del'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
+		delete(
+			path: KoaRoutePaths<'delete' | 'del'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
+		): Router<StateT, CustomT>
+		delete<T, U>(
+			name: string,
+			path: KoaRoutePath<'delete' | 'del'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
+		delete<T, U>(
+			path: KoaRoutePaths<'delete' | 'del'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
 
 		/**
 		 * Alias for `router.delete()` because delete is a reserved word
 		 */
-		del<M extends 'delete' | 'del', P extends KoaRoutePath<M>>(name: string, path: P, ...middleware: MiddleWare<M, P>[]): Router<StateT, CustomT>
-		del<M extends 'delete' | 'del', P extends KoaRoutePaths<M>>(path: P, ...middleware: MiddleWare<M, P>[]): Router<StateT, CustomT>
-		// del<T, U>(
-		// 	name: string,
-		// 	path: KoaRoutePath<'delete' | 'del'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
-		// del<T, U>(
-		// 	path: KoaRoutePaths<'delete' | 'del'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
+		del(
+			name: string,
+			path: KoaRoutePath<'delete' | 'del'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
+		): Router<StateT, CustomT>
+		del(
+			path: KoaRoutePaths<'delete' | 'del'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
+		): Router<StateT, CustomT>
+		del<T, U>(
+			name: string,
+			path: KoaRoutePath<'delete' | 'del'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
+		del<T, U>(
+			path: KoaRoutePaths<'delete' | 'del'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
 
 		/**
 		 * HTTP head method
 		 */
-		head<M extends 'head', P extends KoaRoutePath<M>>(name: string, path: P, ...middleware: MiddleWare<M, P>[]): Router<StateT, CustomT>
-		head(path: P, ...middleware: MiddleWare<M, P>[]): Router<StateT, CustomT>
-		// head<T, U>(
-		// 	name: string,
-		// 	path: KoaRoutePath<'head'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
-		// head<T, U>(
-		// 	path: KoaRoutePaths<'head'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
+		head(
+			name: string,
+			path: KoaRoutePath<'head'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
+		): Router<StateT, CustomT>
+		head(
+			path: KoaRoutePaths<'head'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
+		): Router<StateT, CustomT>
+		head<T, U>(
+			name: string,
+			path: KoaRoutePath<'head'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
+		head<T, U>(
+			path: KoaRoutePaths<'head'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
 
 		/**
 		 * HTTP options method
 		 */
-		options<M extends 'options', P extends KoaRoutePath<M>>(name: string, path: P, ...middleware: MiddleWare<M, P>[]): Router<StateT, CustomT>
-		options<M extends 'options', P extends KoaRoutePaths<M>>(path: P, ...middleware: MiddleWare<M, P>[]): Router<StateT, CustomT>
-		// options<T, U>(
-		// 	name: string,
-		// 	path: KoaRoutePath<'options'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
-		// options<T, U>(
-		// 	path: KoaRoutePaths<'options'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
+		options(
+			name: string,
+			path: KoaRoutePath<'options'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
+		): Router<StateT, CustomT>
+		options(
+			path: KoaRoutePaths<'options'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
+		): Router<StateT, CustomT>
+		options<T, U>(
+			name: string,
+			path: KoaRoutePath<'options'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
+		options<T, U>(
+			path: KoaRoutePaths<'options'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
 
 		/**
 		 * HTTP patch method
 		 */
-		patch<M extends 'patch', P extends KoaRoutePath<M>>(name: string, path: P, ...middleware: MiddleWare<M, P>[]): Router<StateT, CustomT>
-		patch<M extends 'patch', P extends KoaRoutePaths<M>>(path: P, ...middleware: MiddleWare<M, P>[]): Router<StateT, CustomT>
-		// patch<T, U>(
-		// 	name: string,
-		// 	path: KoaRoutePath<'patch'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
-		// patch<T, U>(
-		// 	path: KoaRoutePaths<'patch'>,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
+		patch(
+			name: string,
+			path: KoaRoutePath<'patch'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
+		): Router<StateT, CustomT>
+		patch(
+			path: KoaRoutePaths<'patch'>,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
+		): Router<StateT, CustomT>
+		patch<T, U>(
+			name: string,
+			path: KoaRoutePath<'patch'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
+		patch<T, U>(
+			path: KoaRoutePaths<'patch'>,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
 
 		/**
 		 * Register route with all methods.
 		 */
-		all<M extends 'all', P extends KoaRoutePath<M>>(name: string, path: P, ...middleware: MiddleWare<M, P>[]): Router<StateT, CustomT>
-		all<M extends 'all', P extends KoaRoutePaths<M>>(path: P, ...middleware: MiddleWare<M, P>[]): Router<StateT, CustomT>
-		// all<T, U>(
-		// 	name: string,
-		// 	path: KoaRoutePath,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
-		// all<T, U>(
-		// 	path: KoaRoutePaths,
-		// 	middleware: Koa.Middleware<T, U>,
-		// 	routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
-		// ): Router<StateT & T, CustomT & U>
+		all(
+			name: string,
+			path: KoaRoutePath,
+			...middleware: Array<Router.IMiddleware<StateT, CustomT>>
+		): Router<StateT, CustomT>
+		all(path: KoaRoutePaths, ...middleware: Array<Router.IMiddleware<StateT, CustomT>>): Router<StateT, CustomT>
+		all<T, U>(
+			name: string,
+			path: KoaRoutePath,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
+		all<T, U>(
+			path: KoaRoutePaths,
+			middleware: Koa.Middleware<T, U>,
+			routeHandler: Router.IMiddleware<StateT & T, CustomT & U>
+		): Router<StateT & T, CustomT & U>
 
 		/**
 		 * Set the path prefix for a Router instance that was already initialized.

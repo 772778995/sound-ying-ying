@@ -10,21 +10,24 @@ export type Urls = {
     | "/register/phone"
     | "/send-code/sms"
     | "/send-code/email";
-  all: Urls["post"];
+  get: "/audios" | `/audio/{uuid}`;
+  all: Urls["post"] | Urls["get"];
 };
 
 export type RefSchema = {
-  code: number;
+  resCode: number;
 
   resMsgType: string;
 
   psd: string;
 
+  uuid: string;
+
   resSchema: {
     /**
      * @description 响应状态码
      */
-    code: RefSchema["code"];
+    code: RefSchema["resCode"];
     /**
      * @description 响应消息类型
      */
@@ -32,14 +35,43 @@ export type RefSchema = {
     /**
      * @description 前端提示消息，type 值为空则不显示
      */
-    msg?: string;
+    msg?: RefSchema["resMsg"];
   };
 
   email: string;
 
+  createDate: string;
+
   code: string;
 
+  updateDate: string;
+
+  resMsg: string;
+
   phone: string;
+
+  deleteDate: string;
+
+  codeType: number;
+
+  userInfo: {
+    email: RefSchema["email"];
+    phone?: RefSchema["phone"];
+    psd: RefSchema["psd"];
+    uuid: RefSchema["uuid"];
+    createDate: RefSchema["createDate"];
+    updateDate: RefSchema["updateDate"];
+    deleteDate: RefSchema["deleteDate"];
+  };
+
+  token: string;
+
+  loginRes: {
+    data: {
+      userInfo: RefSchema["userInfo"];
+      token: RefSchema["token"];
+    };
+  };
 };
 
 type ApiDetails = {
@@ -116,7 +148,7 @@ type ApiDetails = {
         psd: RefSchema["psd"];
       };
 
-      response: {};
+      response: RefSchema["loginRes"];
     };
 
     /**
@@ -141,12 +173,12 @@ type ApiDetails = {
         emailCode: RefSchema["code"];
       };
 
-      response: {};
+      response: RefSchema["loginRes"];
     };
 
     /**
      * 邮箱注册
-     * @status developing
+     * @status released
      * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202
      */
     "/register/email": {
@@ -219,6 +251,10 @@ type ApiDetails = {
          * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-109377885
          */
         phone: RefSchema["phone"];
+        /**
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-109377885
+         */
+        type: RefSchema["codeType"];
       };
 
       response: {};
@@ -238,6 +274,10 @@ type ApiDetails = {
          * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326083
          */
         email: RefSchema["email"];
+        /**
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-114326083
+         */
+        type: RefSchema["codeType"];
       };
 
       response: {
@@ -246,6 +286,47 @@ type ApiDetails = {
          */
         email: RefSchema["email"];
       };
+    };
+  };
+
+  get: {
+    /**
+     * 音频列表
+     * @status developing
+     * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-116421374
+     */
+    "/audios": {
+      contentType: "none";
+      params: {
+        /**
+         * @description 页码
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-116421374
+         */
+        page: number;
+        /**
+         * @description 单页数量
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-116421374
+         */
+        pageSize: number;
+      };
+
+      data: never;
+
+      response: {};
+    };
+
+    /**
+     * 查看音频
+     * @status developing
+     * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-116421376
+     */
+    "/audio/{uuid}": {
+      contentType: "none";
+      params: never;
+
+      data: never;
+
+      response: {};
     };
   };
 };

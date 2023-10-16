@@ -2,8 +2,10 @@ import api from '@/src/api'
 import useRequest from '@/src/hooks/useRequest'
 import useSendEmail, { EmailCodeType } from '@/src/hooks/useSendEmail'
 import { ApiDetails } from '@/src/typings/apis'
+import localForage from '@/src/utils/localForage'
 import { QInput } from 'quasar'
 
+/** 登录表单 */
 type LoginForm = //
   ApiDetails['post']['/login/email/code']['data'] &
     ApiDetails['post']['/login/email/psd']['data'] &
@@ -45,7 +47,9 @@ export default (props: Props) => {
 
   const loginHandler = async () => {
     const { token, userInfo } = await login()
-    localStorage.setItem('token', token)
+    localStorage.setItem('token', token) // token 存在 localStorage，因为新页面 localForage 异步获取 token 有问题
+    await localForage.setItem('userInfo', userInfo)
+    useRouter().replace({ name: '首页' })
   }
 
   return {

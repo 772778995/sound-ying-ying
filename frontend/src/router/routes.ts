@@ -6,6 +6,7 @@ export type RouteName = '录音器' | '登录'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
+    name: '首页',
     redirect: '/recorder',
     component: () => import('@/src/pages/home/Home.vue'),
     children: [

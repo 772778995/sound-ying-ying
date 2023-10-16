@@ -13,7 +13,9 @@
     "dev-electron": "quasar dev -m electron --devtools",
     "build-electron": "quasar build -m electron",
     "dev-android": "quasar dev -m capacitor -T android",
-    "build-android": "quasar build -m capacitor -T android",
+    "zipaligen-apk": "zipalign -v 4 .\\dist\\capacitor\\android\\apk\\release\\app-release-unsigned.apk .\\dist\\capacitor\\android\\apk\\release\\音嘤嘤.apk",
+    "apksigner": "apksigner sign --ks .\\yin-ying-ying-key.keystore --ks-key-alias yin-ying-ying .\\dist\\capacitor\\android\\apk\\release\\音嘤嘤.apk",
+    "build-android": "quasar build -m capacitor -T android && npm run zipaligen-apk && npm run apksigner",
     "update-api": "npx apifox-to-axios-ts@latest update",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore"

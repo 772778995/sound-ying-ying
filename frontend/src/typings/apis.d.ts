@@ -10,7 +10,8 @@ export type Urls = {
     | "/register/phone"
     | "/send-code/sms"
     | "/send-code/email";
-  all: Urls["post"];
+  get: "/audios" | `/user/{uuid}`;
+  all: Urls["post"] | Urls["get"];
 };
 
 export type RefSchema = {
@@ -177,7 +178,7 @@ type ApiDetails = {
 
     /**
      * 邮箱注册
-     * @status developing
+     * @status released
      * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-108378202
      */
     "/register/email": {
@@ -285,6 +286,47 @@ type ApiDetails = {
          */
         email: RefSchema["email"];
       };
+    };
+  };
+
+  get: {
+    /**
+     * 音频列表
+     * @status developing
+     * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-116421374
+     */
+    "/audios": {
+      contentType: "none";
+      params: {
+        /**
+         * @description 页码
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-116421374
+         */
+        page: number;
+        /**
+         * @description 单页数量
+         * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-116421374
+         */
+        pageSize: number;
+      };
+
+      data: never;
+
+      response: {};
+    };
+
+    /**
+     * 查看音频
+     * @status developing
+     * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-116421376
+     */
+    "/user/{uuid}": {
+      contentType: "none";
+      params: never;
+
+      data: never;
+
+      response: {};
     };
   };
 };

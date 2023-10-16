@@ -4,12 +4,19 @@ import throwError from '../utils/throwError'
 import { Notify } from 'quasar'
 
 const Axios = _Axios as AxiosStatic
-const api = Axios.create({ baseURL: 'http://127.0.0.1:54088/api' })
+const api = Axios.create({ baseURL: 'http://192.168.0.105:54088/api' })
 
 export const reqs = ref(0)
 
 api.interceptors.request.use(config => {
   reqs.value++
+  const token = localStorage.getItem('token')
+  if (token) {
+    if (!config.headers) config.headers = {}
+    Object.assign(config.headers, {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    })
+  }
   return config
 })
 

@@ -313,7 +313,9 @@ export interface AxiosRequestConfig<
     | 'application/x-www-form-urlencoded'
     | 'none'
 > {
-  url?: U
+  url?: U extends `${infer Before}/{${infer Param}}${infer After}`
+    ? `${Before}/${string}${After}`
+    : U
   method?: M | Uppercase<M>
   baseURL?: string
   transformRequest?: AxiosRequestTransformer | AxiosRequestTransformer[]

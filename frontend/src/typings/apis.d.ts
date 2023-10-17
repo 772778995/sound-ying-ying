@@ -10,7 +10,7 @@ export type Urls = {
     | "/register/phone"
     | "/send-code/sms"
     | "/send-code/email";
-  get: "/audios" | `/user/{uuid}`;
+  get: "/audios" | `/user/${string}`;
   all: Urls["post"] | Urls["get"];
 };
 
@@ -320,7 +320,7 @@ type ApiDetails = {
      * @status developing
      * @see https://www.apifox.cn/apidoc/shared-683015d2-654c-4aa1-82c8-98677933ff99/api-116421376
      */
-    "/user/{uuid}": {
+    [x: `/user/${string}`]: {
       contentType: "none";
       params: never;
 

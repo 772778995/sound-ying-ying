@@ -4,7 +4,7 @@ import throwError from '../utils/throwError'
 import { Notify } from 'quasar'
 
 const Axios = _Axios as AxiosStatic
-const api = Axios.create({ baseURL: 'http://192.168.0.105:54088/api' })
+const api = Axios.create({ baseURL: 'http://10.88.18.17:54088/api' })
 
 export const reqs = ref(0)
 
@@ -62,4 +62,3 @@ declare module '@/src/typings/axios' {
   // @ts-ignore
   export type AxiosResponse<T> = T['data']
 }
-

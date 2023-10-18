@@ -1,3 +1,4 @@
+import './env'
 import koaRange from 'koa-range'
 import Koa from 'koa'
 import koaStatic from 'koa-static'
@@ -40,7 +41,7 @@ const bootstrap = async () => {
 		.use(validateMiddleware)
 		.use(jwtMiddle)
 		.use(router.routes())
-		.listen(54088, () => logger(`http://127.0.0.1:54088`))
+		.listen(process.env.SERVER_PORT, () => logger(`http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}`))
 		.on('error', err => throwError(`启动服务失败：${err.message}`))
 }
 

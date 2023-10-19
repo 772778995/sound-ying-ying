@@ -16,7 +16,7 @@ export const loginRes = (ctx: Context, user: User) => {
 		data: {
 			userInfo: {
 				...omit(user, 'psd'),
-				phone: user.phone.replace(/(?<=\d{3})\d{4}/, '****')
+				phone: user.phone?.replace(/(?<=\d{3})\d{4}/, '****') || ''
 			},
 			token
 		}

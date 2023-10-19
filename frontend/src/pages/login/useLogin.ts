@@ -20,6 +20,7 @@ type Props = {
 // TODO 手机号密码登录
 export default (props: Props) => {
   const { emailInputRef } = props
+  const router = useRouter()
 
   const loginType: Ref<['email' | 'phone', 'psd' | 'emailCode' | 'smsCode']> = ref([
     'email',
@@ -49,7 +50,7 @@ export default (props: Props) => {
     const { token, userInfo } = await login()
     localStorage.setItem('token', token) // token 存在 localStorage，因为新页面 localForage 异步获取 token 有问题
     await localForage.setItem('userInfo', userInfo)
-    useRouter().replace({ name: '首页' })
+    router.replace({ name: '首页' })
   }
 
   return {
